@@ -30,7 +30,7 @@
 		$category   = $_POST['t2wp_category'];
 		$user       = $_POST['t2wp_user'];
 
-		if(!empty($hashtags) || !empty($usernames))
+		if((!empty($hashtags) || !empty($usernames)) && !empty($category))
 		{
 			// Store the values
 			update_option('t2wp_hashtags', $hashtags);
@@ -39,6 +39,8 @@
 			update_option('t2wp_user', $user);
 			$Success = 'Update was successful.';
 		}
+		elseif(empty($category))
+			$Error = 'Please select a category to post the tweets to.';
 		else
 			$Error = 'Updated failed. Please type a username and/or hashtag. To stop this plugin from working, please disable this plugin.';
 	}
@@ -95,7 +97,7 @@
 			<tr>
 				<th><label for="t2wp_category">Post Category:</label></td>
 				<td><?php
-						$dropdown_options = array("show_option_all" => __("View all categories"), "hide_empty" => 0, "hierarchical" => 1, "show_count" => 1, "orderby" => "name", "name" => "t2wp_category", "selected" => $category);
+						$dropdown_options = array("show_option_all" => __("Please select..."), "hide_empty" => 0, "hierarchical" => 1, "show_count" => 1, "orderby" => "name", "name" => "t2wp_category", "selected" => $category);
 						wp_dropdown_categories($dropdown_options);
 					?>
 				</td>

@@ -30,7 +30,7 @@
 	
 		$ch = curl_init();
 		
-		curl_setopt($ch, CURLOPT_URL, 'http://search.twitter.com/search.json?rpp=100&q=' . $query);  
+		curl_setopt($ch, CURLOPT_URL, 'http://search.twitter.com/search.json?rpp=100&q=' . urlencode($query));  
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($ch, CURLOPT_TIMEOUT, '5');
 
@@ -84,7 +84,7 @@
 		{		
 			if(strtotime($object['created_at']) > $lastRan)
 			{
-				$StatusID = $object['id'];
+				$StatusID = $object['id_str'];
                 $post['post_date'] = date("Y-m-d H:i:s",strtotime($object['created_at']));
                 $post['post_content'] = 'https://twitter.com/'. $object['from_user'] .'/status/' . $StatusID;
 				$post['post_status'] = 'publish';

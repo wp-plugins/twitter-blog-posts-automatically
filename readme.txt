@@ -25,7 +25,7 @@ Publish (embed) your Tweets to your WordPress blog automatically (every hour) or
 
 = I need help... =
 
-[Click here](http://www.ss88.co.uk/twitter-blog-posts-automatically/)
+[Click here to go to my blog to ask for help](http://www.ss88.co.uk/twitter-blog-posts-automatically/)
 
 == Screenshots ==
 
@@ -33,6 +33,13 @@ Publish (embed) your Tweets to your WordPress blog automatically (every hour) or
 2. Blog post visual.
 
 == Changelog ==
+
+= 1.1 =
+* added urlencode() to $query param
+* fixed bigint issue on 32 bit machines (hopefully)
+* changed default category name
+* require field is an actual posting category
+
 
 = 1.0 =
 * Launch.
