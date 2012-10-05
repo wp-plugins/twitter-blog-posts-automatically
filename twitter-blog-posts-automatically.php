@@ -3,7 +3,7 @@
    Plugin Name: Twitter Blog Posts Automatically
    Plugin URI: http://www.ss88.co.uk/twitter-blog-posts-automatically/
    Description: Publish your Tweets to your WordPress blog automatically.
-   Version: 1.1
+   Version: 1.2
    Author: Steven Sullivan
    Author URI: http://www.ss88.co.uk/
    License: GPL2

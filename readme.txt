@@ -34,6 +34,12 @@ Publish (embed) your Tweets to your WordPress blog automatically (every hour) or
 
 == Changelog ==
 
+= 1.2 =
+* added file_get_contents if curl is not working
+* added new post format drop down. Setting this to 'status' is your template supports it is best for Twitter posts.
+* Fixed some HTML issues in the admin area
+
+
 = 1.1 =
 * added urlencode() to $query param
 * fixed bigint issue on 32 bit machines (hopefully)

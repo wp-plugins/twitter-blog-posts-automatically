@@ -29,6 +29,7 @@
 		$usernames  = cleanString($_POST['t2wp_usernames']);
 		$category   = $_POST['t2wp_category'];
 		$user       = $_POST['t2wp_user'];
+		$format		= $_POST['t2wp_format'];
 
 		if((!empty($hashtags) || !empty($usernames)) && !empty($category))
 		{
@@ -37,6 +38,7 @@
 			update_option('t2wp_usernames', $usernames);
 			update_option('t2wp_category', $category);
 			update_option('t2wp_user', $user);
+			update_option('t2wp_format', $format);
 			$Success = 'Update was successful.';
 		}
 		elseif(empty($category))
@@ -51,6 +53,7 @@
 		$usernames = get_option('t2wp_usernames');
 		$category = get_option('t2wp_category');
 		$user = get_option('t2wp_user');
+		$format = get_option('t2wp_format');
 	}
 	
 	// Run a Twitter Scan
@@ -87,29 +90,50 @@
 		<input type="hidden" name="t2wp_hidden" value="Y">
 		<table class="form-table">
 			<tr>
-				<th><label for="t2wp_hashtags">Hashtag(s):</label></th>
-				<td><input type="text" name="t2wp_hashtags" id="t2wp_hashtags" value="<?php echo $hashtags; ?>" size="40"></input>&nbsp;<em>eg: tech, bigbrother, fbi (do not include the hash #)</em></input>
+				<td><label for="t2wp_hashtags">Hashtag(s):</label></td>
+				<td><input type="text" name="t2wp_hashtags" id="t2wp_hashtags" value="<?php echo $hashtags; ?>" size="40"></input>&nbsp;<em>eg: tech, bigbrother, fbi (do not include the hash #)</em></input></td>
 			</tr>
 			<tr>
-				<th><label for="t2wp_usernames">Twitter Username(s):</label></th>
+				<td><label for="t2wp_usernames">Twitter Username(s):</label></td>
 				<td><input type="text" name="t2wp_usernames" id="t2wp_usernames" value="<?php echo $usernames; ?>" size="40">&nbsp;<em>eg: StevieSullivan, BBCNews (do not include the @)</em></td>
 			</tr>
 			<tr>
-				<th><label for="t2wp_category">Post Category:</label></td>
+				<td><label for="t2wp_category">Post Category:</label></td>
 				<td><?php
 						$dropdown_options = array("show_option_all" => __("Please select..."), "hide_empty" => 0, "hierarchical" => 1, "show_count" => 1, "orderby" => "name", "name" => "t2wp_category", "selected" => $category);
 						wp_dropdown_categories($dropdown_options);
 					?>
 				</td>
+             </tr>
+			<tr>
+				<td><label for="t2wp_format">Post Format:</label></td>
+				<td><select name="t2wp_format"><option value="post">Default (post)</option><?php
+
+					if ( current_theme_supports( 'post-formats' ) ) {
+						$post_formats = get_theme_support( 'post-formats' );
+					
+						if ( is_array( $post_formats[0] ) ) {
+							foreach($post_formats[0] as $PFormat)
+							{
+								if($format == $PFormat)
+									echo '<option selected>'.$PFormat.'</option>';
+								else
+									echo '<option>'.$PFormat.'</option>';
+							}
+						}
+					}
+
+					?></select>
+				</td>
+             </tr>
 				<tr>
-					<th><label for="name="t2wp_user">Default User:</label></td>
+					<td><label for="t2wp_user">Default User:</label></td>
 					<td><?php 
 							$dropdown_options = array("name" => "t2wp_user", "selected" => $user);
 							wp_dropdown_users($dropdown_options); 
 						?>
 					</td>
 				</tr>
-			</tr>
 		</table>
 		<p class="submit"><input type="submit" name="Submit" value="Update The Settings" /></p>
 		<div id="icon-options-general" class="icon32"><br /></div>

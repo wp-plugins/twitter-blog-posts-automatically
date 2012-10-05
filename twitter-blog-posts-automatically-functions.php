@@ -25,17 +25,22 @@
 		wp_clear_scheduled_hook('t2wp_hourly_update_action');
 	}
 	
-	// Curl
+	// Curl or file_get_contents
 	function t2wp_curl($query) {
 	
-		$ch = curl_init();
-		
-		curl_setopt($ch, CURLOPT_URL, 'http://search.twitter.com/search.json?rpp=100&q=' . urlencode($query));  
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		curl_setopt($ch, CURLOPT_TIMEOUT, '5');
-
-		$content = trim(curl_exec($ch));
-		curl_close($ch);
+		if (!function_exists('curl_init')){ 
+			$ch = file_get_contents('http://search.twitter.com/search.json?rpp=100&q=' . urlencode($query));
+			$content = trim(curl_exec($ch));
+		}
+		else
+		{
+			$ch = curl_init();
+			curl_setopt($ch, CURLOPT_URL, 'http://search.twitter.com/search.json?rpp=100&q=' . urlencode($query));  
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+			curl_setopt($ch, CURLOPT_TIMEOUT, '5');
+			$content = trim(curl_exec($ch));
+			curl_close($ch);
+		}
 		
 		return $content;
 	}
@@ -48,6 +53,7 @@
 		$usernames = get_option('t2wp_usernames');
 		$category = get_option('t2wp_category');
 		$user = get_option('t2wp_user');
+		$format = get_option('t2wp_format');
 		
 		// Run Hashtags
 		if(!empty($hashtags))
@@ -92,6 +98,7 @@
 				$post['post_category'] = array(get_option('t2wp_category'));
 				$post['post_title'] = 'Tweeted: ' . $post['post_date'];
 				$post['post_slug'] = 'Tweeted: ' . $post['post_date'];
+				$post['post_type'] = $format;
 				
                 @wp_insert_post($post);
 				update_option('t2wp_lastran', current_time('timestamp', 1));
