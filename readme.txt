@@ -34,6 +34,12 @@ Publish (embed) your Tweets to your WordPress blog automatically (every hour) or
 
 == Changelog ==
 
+= 1.3 =
+* added error output if a post is not inserted and why. errors produced by wordpress.
+* fixed the post format issue - default before was post/none
+* removed slug and post title when inserting a post.
+
+
 = 1.2 =
 * added file_get_contents if curl is not working
 * added new post format drop down. Setting this to 'status' is your template supports it is best for Twitter posts.
