@@ -85,6 +85,7 @@
 	function t2wp_insert($array) {
 	
 		$lastRan = get_option('t2wp_lastran');
+		$format = get_option('t2wp_format');
 	
 		foreach($array as $object)
 		{		
@@ -96,13 +97,23 @@
 				$post['post_status'] = 'publish';
 				$post['post_author'] = get_option('t2wp_user');
 				$post['post_category'] = array(get_option('t2wp_category'));
-				$post['post_title'] = 'Tweeted: ' . $post['post_date'];
-				$post['post_slug'] = 'Tweeted: ' . $post['post_date'];
+				//$post['post_title'] = 'Tweeted: ' . $post['post_date'];
+				//$post['post_slug'] = 'Tweeted: ' . $post['post_date'];
 				$post['post_type'] = $format;
 				
-                @wp_insert_post($post);
-				update_option('t2wp_lastran', current_time('timestamp', 1));
-				$totalInserted++;
+				//print_r($post);
+				
+				$theResult = wp_insert_post($post, TRUE);
+				
+                if(is_wp_error($theResult))
+				{
+					echo $theResult->get_error_message();
+				}
+				else
+				{
+					update_option('t2wp_lastran', current_time('timestamp', 1));
+					$totalInserted++;
+				}
 			}
 		}
 	
