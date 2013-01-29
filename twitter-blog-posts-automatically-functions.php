@@ -60,7 +60,7 @@
 		{
 			$hashes = explode(',', $hashtags);
 			foreach($hashes as $hash)
-				$query = $hash . '+OR+';
+				$query = '#' . $hash . '+OR+';
 			
 			$result = json_decode(t2wp_curl($query), TRUE);
 			$totalInserted += t2wp_insert($result['results']);

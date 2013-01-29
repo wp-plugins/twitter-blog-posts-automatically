@@ -34,6 +34,9 @@ Publish (embed) your Tweets to your WordPress blog automatically (every hour) or
 
 == Changelog ==
 
+= 1.4 =
+* fixed 'hashtag' bug. Now it's actually extracting #hashtags #like #this
+
 = 1.3 =
 * added error output if a post is not inserted and why. errors produced by wordpress.
 * fixed the post format issue - default before was post/none
