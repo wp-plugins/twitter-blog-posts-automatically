@@ -3,7 +3,7 @@ Contributors: ss88
 Donate link: http://www.ss88.co.uk/twitter-blog-posts-automatically/
 Tags: twitter, blog, posts, automatically
 Requires at least: 3.4
-Tested up to: 3.4.1
+Tested up to: 3.5.1
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -33,6 +33,9 @@ Publish (embed) your Tweets to your WordPress blog automatically (every hour) or
 2. Blog post visual.
 
 == Changelog ==
+
+= 1.5 =
+* fixed timestamp issues. Set to default to server time.
 
 = 1.4 =
 * fixed 'hashtag' bug. Now it's actually extracting #hashtags #like #this

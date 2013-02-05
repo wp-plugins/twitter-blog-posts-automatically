@@ -12,7 +12,7 @@
 	// Activate the Hourly Update
 	function t2wp_activation() {
 		wp_schedule_event(current_time('timestamp'), 'hourly', 't2wp_hourly_update_action');
-		update_option('t2wp_lastran', current_time('timestamp', 1));
+		update_option('t2wp_lastran', current_time('timestamp'));
 	}
 
 	// Perform the hourly update
@@ -111,7 +111,7 @@
 				}
 				else
 				{
-					update_option('t2wp_lastran', current_time('timestamp', 1));
+					update_option('t2wp_lastran', current_time('timestamp'));
 					$totalInserted++;
 				}
 			}
